@@ -33,65 +33,65 @@ export function Step2AdditionalAuthentication({
   };
 
   return (
-    <Card className="mb-6">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-3">
-          <span className="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full text-sm font-bold">
+    <Card className="mb-4 sm:mb-6">
+      <CardHeader className="pb-4 sm:pb-6">
+        <CardTitle className="flex items-center gap-2 sm:gap-3 text-lg sm:text-xl">
+          <span className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 text-white rounded-full text-xs sm:text-sm font-bold">
             2
           </span>
           Additional Authentication
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-gray-600 mb-6">
+        <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
           Connect your SNS or Web3 wallet to securely obtain behavioral data for
           a more comprehensive assessment.
         </p>
 
-        <div className="space-y-4 mb-8">
-          <div className="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-            <div className="flex items-center justify-center w-12 h-12 bg-cyan-500 rounded-lg mr-4">
+        <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+          <div className="flex items-center p-3 sm:p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-cyan-500 rounded-lg mr-3 sm:mr-4 flex-shrink-0">
               <svg
-                className="w-6 h-6 text-white"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
               </svg>
             </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-gray-900">Twitter (X)</h3>
-              <p className="text-sm text-gray-600">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Twitter (X)</h3>
+              <p className="text-xs sm:text-sm text-gray-600">
                 Connect your Twitter account for social behavior analysis
               </p>
             </div>
           </div>
 
-          <div className="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-            <div className="flex items-center justify-center w-12 h-12 bg-blue-600 rounded-lg mr-4">
+          <div className="flex items-center p-3 sm:p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-lg mr-3 sm:mr-4 flex-shrink-0">
               <svg
-                className="w-6 h-6 text-white"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
               </svg>
             </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-gray-900">LinkedIn</h3>
-              <p className="text-sm text-gray-600">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">LinkedIn</h3>
+              <p className="text-xs sm:text-sm text-gray-600">
                 Verify professional credentials and network
               </p>
             </div>
           </div>
 
           <div
-            className="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+            className="flex items-center p-3 sm:p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
             onClick={() => setIsWalletDialogOpen(true)}
           >
-            <div className="flex items-center justify-center w-12 h-12 bg-orange-500 rounded-lg mr-4">
+            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-orange-500 rounded-lg mr-3 sm:mr-4 flex-shrink-0">
               <svg
-                className="w-6 h-6 text-white"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -101,18 +101,18 @@ export function Step2AdditionalAuthentication({
                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
             </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-gray-900">Web3 Wallet</h3>
-              <p className="text-sm text-gray-600">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Web3 Wallet</h3>
+              <p className="text-xs sm:text-sm text-gray-600">
                 {selectedWallet
                   ? `Connected: ${selectedWallet.name} (${selectedWallet.type})`
                   : "Connect your crypto wallet for on-chain history"}
               </p>
             </div>
             {selectedWallet && (
-              <div className="flex items-center text-green-600">
+              <div className="flex items-center text-green-600 flex-shrink-0">
                 <svg
-                  className="w-5 h-5"
+                  className="w-4 h-4 sm:w-5 sm:h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -128,10 +128,10 @@ export function Step2AdditionalAuthentication({
             )}
           </div>
 
-          <div className="flex items-center p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-            <div className="flex items-center justify-center w-12 h-12 bg-green-500 rounded-lg mr-4">
+          <div className="flex items-center p-3 sm:p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+            <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-lg mr-3 sm:mr-4 flex-shrink-0">
               <svg
-                className="w-6 h-6 text-white"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -144,21 +144,21 @@ export function Step2AdditionalAuthentication({
                 />
               </svg>
             </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-gray-900">DID Verification</h3>
-              <p className="text-sm text-gray-600">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">DID Verification</h3>
+              <p className="text-xs sm:text-sm text-gray-600">
                 Decentralized identity verification
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-cyan-50 border border-cyan-200 rounded-lg p-6 mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-cyan-50 border border-cyan-200 rounded-lg p-4 sm:p-6 mb-6 sm:mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="flex items-start">
-              <div className="flex items-center justify-center w-8 h-8 bg-cyan-500 rounded-lg mr-3 flex-shrink-0">
+              <div className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-cyan-500 rounded-lg mr-3 flex-shrink-0">
                 <svg
-                  className="w-4 h-4 text-white"
+                  className="w-3 h-3 sm:w-4 sm:h-4 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -172,19 +172,19 @@ export function Step2AdditionalAuthentication({
                 </svg>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-1">
+                <h4 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">
                   Security Guarantee
                 </h4>
-                <p className="text-sm text-gray-700">
+                <p className="text-xs sm:text-sm text-gray-700">
                   Data securely processed via Zero-Knowledge Proofs (ZKP)
                 </p>
               </div>
             </div>
 
             <div className="flex items-start">
-              <div className="flex items-center justify-center w-8 h-8 bg-cyan-500 rounded-lg mr-3 flex-shrink-0">
+              <div className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-cyan-500 rounded-lg mr-3 flex-shrink-0">
                 <svg
-                  className="w-4 h-4 text-white"
+                  className="w-3 h-3 sm:w-4 sm:h-4 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -198,10 +198,10 @@ export function Step2AdditionalAuthentication({
                 </svg>
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-1">
+                <h4 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">
                   Privacy Protection
                 </h4>
-                <p className="text-sm text-gray-700">
+                <p className="text-xs sm:text-sm text-gray-700">
                   SNS content not stored directly - only behavioral patterns
                   analyzed
                 </p>
@@ -210,11 +210,11 @@ export function Step2AdditionalAuthentication({
           </div>
         </div>
 
-        <div className="flex justify-between pt-6">
-          <Button variant="outline" onClick={onPrevious}>
+        <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 pt-4 sm:pt-6">
+          <Button variant="outline" onClick={onPrevious} className="w-full sm:w-auto">
             Back
           </Button>
-          <Button onClick={onNext}>Proceed to Data Consent</Button>
+          <Button onClick={onNext} className="w-full sm:w-auto">Proceed to Data Consent</Button>
         </div>
       </CardContent>
 

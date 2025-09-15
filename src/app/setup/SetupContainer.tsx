@@ -67,20 +67,20 @@ export function SetupContainer() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-2xl mx-auto p-4 sm:p-6">
       {/* Progress Indicator */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-medium text-gray-600">
+      <div className="mb-6 sm:mb-8">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <span className="text-xs sm:text-sm font-medium text-gray-600">
             Step {currentStep} of {totalSteps}
           </span>
-          <span className="text-sm text-gray-500">
+          <span className="text-xs sm:text-sm text-gray-500">
             {Math.round((currentStep / totalSteps) * 100)}% Complete
           </span>
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2">
           <div
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+            className="bg-blue-600 h-1.5 sm:h-2 rounded-full transition-all duration-300"
             style={{ width: `${(currentStep / totalSteps) * 100}%` }}
           />
         </div>
