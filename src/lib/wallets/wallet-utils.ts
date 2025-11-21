@@ -4,12 +4,18 @@ import { SuiWalletClient } from "./sui/sui-wallet";
 import { useWalletStore } from "../stores/wallet-store";
 
 export class WalletManager {
-  private xamanClient: XamanClient;
+  private xamanClient: XamanClient | null = null;
   private metaMaskClient: MetaMaskClient;
   private suiClient: SuiWalletClient;
 
   constructor() {
-    this.xamanClient = new XamanClient();
+    try {
+      this.xamanClient = new XamanClient();
+    } catch (error) {
+      console.error("Failed to initialize XamanClient:", error);
+      this.xamanClient = null;
+    }
+    
     this.metaMaskClient = new MetaMaskClient();
     this.suiClient = new SuiWalletClient();
   }
@@ -20,6 +26,10 @@ export class WalletManager {
     try {
       setLoading(true);
       setError(null);
+
+      if (!this.xamanClient) {
+        throw new Error("Xaman is not available. Please configure API Key and Secret.");
+      }
 
       const response = await this.xamanClient.authorize();
 
@@ -94,7 +104,9 @@ export class WalletManager {
 
     try {
       if (walletType === "xaman") {
-        await this.xamanClient.logout();
+        if (this.xamanClient) {
+          await this.xamanClient.logout();
+        }
       } else if (walletType === "metamask") {
         // MetaMask doesn't have a logout method, just clear the state
         this.metaMaskClient.removeAllListeners();
@@ -119,6 +131,8 @@ export class WalletManager {
       "0xa": "optimism",
       "0xa4b1": "arbitrum",
       "0x2105": "base",
+      "0xa86a": "Avalance C-Chain",
+      "0xa869": "Avalanche Fuji C-Chain",
     };
 
     return chainIdMap[chainId] || `chain-${chainId}`;
