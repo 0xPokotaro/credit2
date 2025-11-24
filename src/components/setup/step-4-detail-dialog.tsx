@@ -24,6 +24,8 @@ export function Step4DetailDialog() {
 
   const balances = data?.onchain?.balances || [];
   const transactions = data?.onchain?.transactions || [];
+  const totalBalanceUSD = 100000;
+  const totalBalanceJPY = 15000000;
 
   useEffect(() => {
     console.log(data);
@@ -43,26 +45,25 @@ export function Step4DetailDialog() {
           <Tabs defaultValue="onchain" className="w-full">
             <TabsList className="w-full">
               <TabsTrigger value="onchain">On-chain</TabsTrigger>
+              <TabsTrigger value="sns">SNS</TabsTrigger>
             </TabsList>
             <TabsContent value="onchain" className="space-y-4">
               {/* ヘッダー */}
-              <div className="grid grid-cols-3 gap-4 pt-4">
+              <div className="grid grid-cols-2 gap-4 pt-4">
                 <Card className="col-span-1">
                   <CardContent>
-                    <CardTitle className="pb-4">総残高</CardTitle>
-                    <p className="text-4xl">100,000</p>
+                    <CardTitle className="pb-4">総残高 USD</CardTitle>
+                    <p className="text-4xl">
+                      {totalBalanceUSD.toLocaleString()}
+                    </p>
                   </CardContent>
                 </Card>
                 <Card className="col-span-1">
                   <CardContent>
-                    <CardTitle className="pb-4">総残高</CardTitle>
-                    <p className="text-4xl">100,000</p>
-                  </CardContent>
-                </Card>
-                <Card className="col-span-1">
-                  <CardContent>
-                    <CardTitle className="pb-4">総残高</CardTitle>
-                    <p className="text-4xl">100,000</p>
+                    <CardTitle className="pb-4">総残高 JPY</CardTitle>
+                    <p className="text-4xl">
+                      {totalBalanceJPY.toLocaleString()}
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -84,6 +85,11 @@ export function Step4DetailDialog() {
                     />
                   </CardContent>
                 </Card>
+              </div>
+            </TabsContent>
+            <TabsContent value="sns" className="space-y-4">
+              <div className="flex items-center justify-center py-12">
+                <p className="text-lg text-gray-600">開発中</p>
               </div>
             </TabsContent>
           </Tabs>
