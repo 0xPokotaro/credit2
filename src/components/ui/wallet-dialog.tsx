@@ -83,8 +83,11 @@ export function WalletDialog({
   onOpenChange,
   onWalletSelect,
 }: WalletDialogProps) {
-  const { isLoading, error, clearError, isConnected, walletType, address } = useWalletStore();
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState<string | null>(null);
+  const { isLoading, error, clearError, isConnected, walletType, address } =
+    useWalletStore();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState<string | null>(
+    null,
+  );
 
   useEffect(() => {
     if (open) {
@@ -96,21 +99,25 @@ export function WalletDialog({
   // 確認ダイアログの外側をクリックした時に閉じる
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (showLogoutConfirm && !(event.target as Element).closest('[data-logout-confirm]')) {
+      if (
+        showLogoutConfirm &&
+        !(event.target as Element).closest("[data-logout-confirm]")
+      ) {
         setShowLogoutConfirm(null);
       }
     };
 
     if (showLogoutConfirm) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [showLogoutConfirm]);
 
   const handleWalletClick = async (wallet: Wallet) => {
     // Check if this wallet is currently connected
     const isCurrentlyConnected = isConnected && walletType === wallet.id;
-    
+
     if (isCurrentlyConnected) {
       // Show logout confirmation
       setShowLogoutConfirm(wallet.id);
@@ -164,14 +171,14 @@ export function WalletDialog({
 
   const getWalletButtonClassName = (wallet: Wallet) => {
     const baseClass = "w-full h-auto p-4 justify-start disabled:opacity-50";
-    
+
     if (isWalletConnected(wallet.id)) {
       if (showLogoutConfirm === wallet.id) {
         return `${baseClass} bg-red-100 text-red-800 hover:bg-red-200 border-red-300`;
       }
       return `${baseClass} bg-white text-green-900 hover:bg-gray-100 border-green-200`;
     }
-    
+
     return `${baseClass} bg-white text-gray-900 hover:bg-gray-50 border-gray-200`;
   };
 
@@ -209,8 +216,8 @@ export function WalletDialog({
                 <Button
                   variant={getWalletButtonVariant(wallet)}
                   className={getWalletButtonClassName(wallet)}
-                  onClick={() => 
-                    showLogoutConfirm === wallet.id 
+                  onClick={() =>
+                    showLogoutConfirm === wallet.id
                       ? handleLogout(wallet.id)
                       : handleWalletClick(wallet)
                   }
@@ -241,7 +248,7 @@ export function WalletDialog({
                   </div>
                 </Button>
                 {showLogoutConfirm === wallet.id && (
-                  <div 
+                  <div
                     className="absolute top-full left-0 right-0 mt-2 p-4 bg-white border-2 border-red-200 rounded-lg shadow-xl z-50"
                     onClick={(e) => e.stopPropagation()}
                     data-logout-confirm
@@ -293,8 +300,8 @@ export function WalletDialog({
                 <Button
                   variant={getWalletButtonVariant(wallet)}
                   className={getWalletButtonClassName(wallet)}
-                  onClick={() => 
-                    showLogoutConfirm === wallet.id 
+                  onClick={() =>
+                    showLogoutConfirm === wallet.id
                       ? handleLogout(wallet.id)
                       : handleWalletClick(wallet)
                   }
@@ -325,7 +332,7 @@ export function WalletDialog({
                   </div>
                 </Button>
                 {showLogoutConfirm === wallet.id && (
-                  <div 
+                  <div
                     className="absolute top-full left-0 right-0 mt-2 p-4 bg-white border-2 border-red-200 rounded-lg shadow-xl z-50"
                     onClick={(e) => e.stopPropagation()}
                     data-logout-confirm
@@ -367,7 +374,9 @@ export function WalletDialog({
 
           <TabsContent value="sui" className="space-y-3 mt-6">
             <div className="text-center mb-4">
-              <h3 className="font-semibold text-gray-900 mb-1">Sui Blockchain</h3>
+              <h3 className="font-semibold text-gray-900 mb-1">
+                Sui Blockchain
+              </h3>
               <p className="text-sm text-gray-600">
                 Connect to the Sui blockchain network
               </p>
@@ -377,8 +386,8 @@ export function WalletDialog({
                 <Button
                   variant={getWalletButtonVariant(wallet)}
                   className={getWalletButtonClassName(wallet)}
-                  onClick={() => 
-                    showLogoutConfirm === wallet.id 
+                  onClick={() =>
+                    showLogoutConfirm === wallet.id
                       ? handleLogout(wallet.id)
                       : handleWalletClick(wallet)
                   }
@@ -409,7 +418,7 @@ export function WalletDialog({
                   </div>
                 </Button>
                 {showLogoutConfirm === wallet.id && (
-                  <div 
+                  <div
                     className="absolute top-full left-0 right-0 mt-2 p-4 bg-white border-2 border-red-200 rounded-lg shadow-xl z-50"
                     onClick={(e) => e.stopPropagation()}
                     data-logout-confirm

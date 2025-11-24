@@ -21,7 +21,7 @@ export class SuiWalletClient {
 
   private checkInstalled(): boolean {
     if (typeof window === "undefined") return false;
-    
+
     // Check for Sui Wallet extension
     this.installed = !!(window as any).suiWallet;
     return this.installed;
@@ -38,16 +38,16 @@ export class SuiWalletClient {
 
     try {
       const suiWallet = (window as any).suiWallet;
-      
+
       // Request connection
       const result = await suiWallet.connect();
-      
+
       if (!result || !result.accounts || result.accounts.length === 0) {
         throw new Error("No accounts found");
       }
 
       const account = result.accounts[0];
-      
+
       return {
         address: account.address,
         publicKey: account.publicKey,
@@ -56,7 +56,9 @@ export class SuiWalletClient {
       if (error.code === 4001) {
         throw new Error("User rejected the connection request");
       }
-      throw new Error(`Failed to connect to ${this.walletName}: ${error.message}`);
+      throw new Error(
+        `Failed to connect to ${this.walletName}: ${error.message}`,
+      );
     }
   }
 
@@ -105,7 +107,7 @@ export class SuiWalletClient {
 
     const suiWallet = (window as any).suiWallet;
     if (suiWallet.on) {
-      suiWallet.on('accountsChanged', callback);
+      suiWallet.on("accountsChanged", callback);
     }
   }
 
@@ -114,7 +116,7 @@ export class SuiWalletClient {
 
     const suiWallet = (window as any).suiWallet;
     if (suiWallet.on) {
-      suiWallet.on('disconnect', callback);
+      suiWallet.on("disconnect", callback);
     }
   }
 

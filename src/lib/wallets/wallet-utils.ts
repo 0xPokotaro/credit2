@@ -15,7 +15,7 @@ export class WalletManager {
       console.error("Failed to initialize XamanClient:", error);
       this.xamanClient = null;
     }
-    
+
     this.metaMaskClient = new MetaMaskClient();
     this.suiClient = new SuiWalletClient();
   }
@@ -28,7 +28,9 @@ export class WalletManager {
       setError(null);
 
       if (!this.xamanClient) {
-        throw new Error("Xaman is not available. Please configure API Key and Secret.");
+        throw new Error(
+          "Xaman is not available. Please configure API Key and Secret.",
+        );
       }
 
       const response = await this.xamanClient.authorize();

@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 export function HistoryContainer() {
-  const [evmAddress, setEvmAddress] = useState('');
-  const [evmError, setEvmError] = useState('');
+  const [evmAddress, setEvmAddress] = useState("");
+  const [evmError, setEvmError] = useState("");
 
   const handleEvmSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const trimmedEvm = evmAddress.trim();
-    
+
     if (!trimmedEvm) {
-      setEvmError('ウォレットアドレスを入力してください');
+      setEvmError("ウォレットアドレスを入力してください");
       return;
     }
-    
-    setEvmError('');
-    console.log('EVM Address:', trimmedEvm);
+
+    setEvmError("");
+    console.log("EVM Address:", trimmedEvm);
   };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">
       <h1 className="text-2xl font-bold mb-6">Wallet Address History</h1>
-      
+
       <div>
         <h2 className="text-xl font-semibold mb-4">EVM</h2>
         <form onSubmit={handleEvmSubmit} className="space-y-4">
@@ -39,7 +39,7 @@ export function HistoryContainer() {
               value={evmAddress}
               onChange={(e) => {
                 setEvmAddress(e.target.value);
-                if (evmError) setEvmError('');
+                if (evmError) setEvmError("");
               }}
             />
           </div>
@@ -50,7 +50,11 @@ export function HistoryContainer() {
             </div>
           )}
 
-          <Button type="submit" className="w-full" disabled={!evmAddress.trim()}>
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={!evmAddress.trim()}
+          >
             送信
           </Button>
         </form>

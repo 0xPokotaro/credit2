@@ -1,0 +1,44 @@
+{
+  "Topbar": {
+    "faq": "よくある質問",
+    "support": "サポート",
+    "en": "英語",
+    "ja": "日本語"
+  },
+  "HeroSection": {
+    "tagline": "次世代の信用評価",
+    "title1": "安全で公平な",
+    "title2": "共有体験",
+    "description": "Credit 2.0により、高度なAIとブロックチェーン技術を活用した透明で公平な金融エコシステムに誰もが参加できます。",
+    "startApplication": "申請を開始",
+    "learnHowItWorks": "仕組みを学ぶ",
+    "feature1": "ゼロ知識証明",
+    "feature2": "ブロックチェーン検証",
+    "feature3": "AI駆動の評価"
+  },
+  "FeatureCards": {
+    "safetyFirst": {
+      "title": "安全性第一",
+      "description": "高度な暗号化とゼロ知識証明により、お客様のデータは保護され、プロセス全体で最大限のセキュリティが確保されます。"
+    },
+    "fairAssessment": {
+      "title": "公平な評価",
+      "description": "AI駆動の評価では、複数のデータソースを考慮し、より包括的で公平な信用度評価を実現します。"
+    },
+    "simpleProcess": {
+      "title": "シンプルなプロセス",
+      "description": "リアルタイムの結果とスコアリング手法の完全な透明性を備えた、迅速で直感的な申請プロセスです。"
+    }
+  },
+  "StatsSection": {
+    "dataSecurityRate": "データセキュリティ率",
+    "averageProcessingTime": "平均処理時間",
+    "successfulApplications": "成功した申請数"
+  },
+  "Footer": {
+    "termsOfService": "利用規約",
+    "privacyPolicy": "プライバシーポリシー",
+    "contactUs": "お問い合わせ",
+    "copyright": "© 2025 Credit 2.0. 全著作権所有。"
+  }
+}

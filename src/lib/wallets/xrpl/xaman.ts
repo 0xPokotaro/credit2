@@ -25,7 +25,9 @@ export class XamanClient {
 
   async authorize() {
     if (!this.initialized || !this.xaman) {
-      throw new Error("Xaman is not initialized. Please configure API Key and Secret.");
+      throw new Error(
+        "Xaman is not initialized. Please configure API Key and Secret.",
+      );
     }
 
     const response = await this.xaman.authorize();
@@ -55,7 +57,7 @@ export class XamanClient {
     } catch (error) {
       console.error("Error during Xaman logout:", error);
     }
-    
+
     localStorage.removeItem("XummPkceJwt");
     localStorage.removeItem("pkce_state");
     window.location.reload();

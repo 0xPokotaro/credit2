@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 
 interface Step3DataConsentProps {
   onNext: () => void;
@@ -12,6 +14,12 @@ export function Step3DataConsent({
   onNext,
   onPrevious,
 }: Step3DataConsentProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleNext = () => {
+    setIsLoading(true);
+    onNext();
+  };
   return (
     <Card className="mb-6">
       <CardHeader>
@@ -143,10 +151,13 @@ export function Step3DataConsent({
         </div>
 
         <div className="flex justify-between pt-6">
-          <Button variant="outline" onClick={onPrevious}>
+          <Button variant="outline" onClick={onPrevious} disabled={isLoading}>
             Back
           </Button>
-          <Button onClick={onNext}>Agree & Proceed to Scoring</Button>
+          <Button onClick={handleNext} disabled={isLoading}>
+            {isLoading && <Spinner className="mr-2" />}
+            Agree & Proceed to Scoring
+          </Button>
         </div>
       </CardContent>
     </Card>

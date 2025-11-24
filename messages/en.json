@@ -1,0 +1,44 @@
+{
+  "Topbar": {
+    "faq": "FAQ",
+    "support": "SUPPORT",
+    "en": "EN",
+    "ja": "JA"
+  },
+  "HeroSection": {
+    "tagline": "Next-generation credit assessment",
+    "title1": "A SAFE AND FAIR",
+    "title2": "SHARING EXPERIENCE",
+    "description": "With Credit 2.0, everyone can participate in a transparent and equitable financial ecosystem powered by advanced AI and blockchain technology.",
+    "startApplication": "START APPLICATION",
+    "learnHowItWorks": "LEARN HOW IT WORKS",
+    "feature1": "Zero-knowledge proofs",
+    "feature2": "Blockchain verified",
+    "feature3": "AI-powered assessment"
+  },
+  "FeatureCards": {
+    "safetyFirst": {
+      "title": "SAFETY FIRST",
+      "description": "Your data is protected with advanced encryption and zero-knowledge proofs, ensuring maximum security throughout the process."
+    },
+    "fairAssessment": {
+      "title": "FAIR ASSESSMENT",
+      "description": "Our AI-driven assessment considers multiple data sources for a more comprehensive and equitable evaluation of your creditworthiness."
+    },
+    "simpleProcess": {
+      "title": "SIMPLE PROCESS",
+      "description": "Quick and intuitive application process with real-time results and complete transparency in our scoring methodology."
+    }
+  },
+  "StatsSection": {
+    "dataSecurityRate": "Data Security Rate",
+    "averageProcessingTime": "Average Processing Time",
+    "successfulApplications": "Successful Applications"
+  },
+  "Footer": {
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "contactUs": "Contact Us",
+    "copyright": "© 2025 Credit 2.0. All rights reserved."
+  }
+}

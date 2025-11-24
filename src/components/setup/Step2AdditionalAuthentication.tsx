@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { WalletDialog } from "@/components/ui/wallet-dialog";
+import { useWalletStore } from "@/lib/stores/wallet-store";
 
 interface Step2AdditionalAuthenticationProps {
   onNext: () => void;
@@ -15,21 +16,51 @@ export function Step2AdditionalAuthentication({
   onPrevious,
 }: Step2AdditionalAuthenticationProps) {
   const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
-  const [selectedWallet, setSelectedWallet] = useState<{
-    name: string;
-    type: string;
-  } | null>(null);
+  const { isConnected, walletType, address, chain } = useWalletStore();
 
-  const handleWalletSelect = (wallet: {
-    id: string;
-    name: string;
-    icon: React.ReactNode;
-    description: string;
-  }) => {
-    setSelectedWallet({
-      name: wallet.name,
-      type: wallet.id === "xaman" ? "XRP Ledger" : "EVM",
-    });
+  const handleWalletSelect = () => {
+    // Wallet connection is handled by the store, no local state needed
+  };
+
+  const getWalletDisplayName = (type: string | null) => {
+    if (!type) return "";
+    switch (type) {
+      case "xaman":
+        return "Xaman";
+      case "metamask":
+        return "MetaMask";
+      case "sui":
+        return "Sui Wallet";
+      default:
+        return "Unknown";
+    }
+  };
+
+  const getChainDisplayName = (chainName: string | null) => {
+    if (!chainName) return "";
+    switch (chainName) {
+      case "xrp":
+        return "XRP Ledger";
+      case "ethereum":
+        return "Ethereum";
+      case "polygon":
+        return "Polygon";
+      case "bsc":
+        return "BSC";
+      case "optimism":
+        return "Optimism";
+      case "arbitrum":
+        return "Arbitrum";
+      case "base":
+        return "Base";
+      default:
+        return chainName;
+    }
+  };
+
+  const formatAddress = (addr: string | null) => {
+    if (!addr) return "";
+    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
   return (
@@ -60,7 +91,9 @@ export function Step2AdditionalAuthentication({
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Twitter (X)</h3>
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+                X (Twitter)
+              </h3>
               <p className="text-xs sm:text-sm text-gray-600">
                 Connect your Twitter account for social behavior analysis
               </p>
@@ -78,7 +111,9 @@ export function Step2AdditionalAuthentication({
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">LinkedIn</h3>
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+                LinkedIn
+              </h3>
               <p className="text-xs sm:text-sm text-gray-600">
                 Verify professional credentials and network
               </p>
@@ -102,14 +137,16 @@ export function Step2AdditionalAuthentication({
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Web3 Wallet</h3>
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+                Web3 Wallet
+              </h3>
               <p className="text-xs sm:text-sm text-gray-600">
-                {selectedWallet
-                  ? `Connected: ${selectedWallet.name} (${selectedWallet.type})`
+                {isConnected && walletType
+                  ? `Connected: ${getWalletDisplayName(walletType)}${address ? ` - ${formatAddress(address)}` : ""}`
                   : "Connect your crypto wallet for on-chain history"}
               </p>
             </div>
-            {selectedWallet && (
+            {isConnected && (
               <div className="flex items-center text-green-600 flex-shrink-0">
                 <svg
                   className="w-4 h-4 sm:w-5 sm:h-5"
@@ -145,7 +182,9 @@ export function Step2AdditionalAuthentication({
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">DID Verification</h3>
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+                DID Verification
+              </h3>
               <p className="text-xs sm:text-sm text-gray-600">
                 Decentralized identity verification
               </p>
@@ -211,10 +250,16 @@ export function Step2AdditionalAuthentication({
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 pt-4 sm:pt-6">
-          <Button variant="outline" onClick={onPrevious} className="w-full sm:w-auto">
+          <Button
+            variant="outline"
+            onClick={onPrevious}
+            className="w-full sm:w-auto"
+          >
             Back
           </Button>
-          <Button onClick={onNext} className="w-full sm:w-auto">Proceed to Data Consent</Button>
+          <Button onClick={onNext} className="w-full sm:w-auto">
+            Proceed to Data Consent
+          </Button>
         </div>
       </CardContent>
 
