@@ -5,9 +5,13 @@ import { Button } from "@/components/ui/button";
 import { WalletDialog } from "@/components/ui/wallet-dialog";
 import { useWalletStore } from "@/lib/stores/wallet-store";
 import { useGetTransactions } from "./_hooks/use-get-transactions";
-import { DataTable } from "./_components/DataTable";
+import { TransactionTable } from "./_components/transaction-table";
+import {
+  getWalletDisplayName,
+  shortenAddress,
+} from "@/lib/utils/wallet-display";
 
-export function DemoContainer() {
+export function WalletExplorerContainer() {
   const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
   const { isConnected, address, walletType, chain } = useWalletStore();
   const {
@@ -18,19 +22,6 @@ export function DemoContainer() {
 
   const handleWalletSelect = (wallet: any) => {
     console.log("Wallet selected:", wallet);
-  };
-
-  const getWalletDisplayName = (type: string) => {
-    switch (type) {
-      case "metamask":
-        return "MetaMask";
-      case "xaman":
-        return "Xaman";
-      case "sui":
-        return "Sui Wallet";
-      default:
-        return "Wallet";
-    }
   };
 
   const formatChainName = (chain: string) => {
@@ -57,7 +48,7 @@ export function DemoContainer() {
       )}
       <Button onClick={() => setIsWalletDialogOpen(true)}>
         {isConnected && address
-          ? `${getWalletDisplayName(walletType!)}: ${address.slice(0, 6)}...${address.slice(-4)}`
+          ? `${getWalletDisplayName(walletType!)}: ${shortenAddress(address)}`
           : "Connect"}
       </Button>
       <WalletDialog
@@ -65,7 +56,7 @@ export function DemoContainer() {
         onOpenChange={setIsWalletDialogOpen}
         onWalletSelect={handleWalletSelect}
       />
-      <DataTable
+      <TransactionTable
         transactions={transactions}
         isLoading={isLoading}
         isStale={isStale}

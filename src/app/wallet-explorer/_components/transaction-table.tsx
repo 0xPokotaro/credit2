@@ -18,7 +18,7 @@ import {
 import { useTranslations } from "next-intl";
 import type { Transaction } from "@/types";
 
-interface DataTableProps {
+interface TransactionTableProps {
   transactions?: Transaction[];
   isLoading: boolean;
   isStale: boolean;
@@ -46,12 +46,12 @@ function formatValue(value: string, decimals: number = 18): string {
   }
 }
 
-export function DataTable({
+export function TransactionTable({
   transactions,
   isLoading,
   isStale,
   address,
-}: DataTableProps) {
+}: TransactionTableProps) {
   const t = useTranslations("TransactionTable");
 
   const displayAddress = (addr: string, chainName: string) => {

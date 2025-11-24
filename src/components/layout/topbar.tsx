@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTranslations, useLocale } from "next-intl";
-import { setLocale } from "@/app/actions";
+import { setLocale } from "@/app/locale-actions";
 import { useRouter } from "next/navigation";
 
 export function Topbar() {

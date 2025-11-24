@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Topbar } from "@/components/layout/Topbar";
+import { Topbar } from "@/components/layout/topbar";
 import { WalletProvider } from "@/components/wallet/wallet-provider";
 import { Providers } from "./providers";
 import { NextIntlClientProvider } from "next-intl";

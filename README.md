@@ -1,8 +1,38 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Setup
+
+Before running the application, you need to configure your environment variables:
+
+1. **Copy the environment template:**
+   ```bash
+   cp .env.example .env.local
+   ```
+
+2. **Configure environment variables:**
+
+   Open `.env.local` and set the following variables as needed:
+
+   **Blockchain API Keys (Optional):**
+   - `AVALANCHE_API_KEY`: Avalanche SDK API key (server-side only)
+     - Get it from: https://www.avax.network/
+   - `NEXT_PUBLIC_SNOW_TRACE_API_KEY`: SnowTrace API key (optional)
+     - Get it from: https://snowtrace.io/apis
+
+   **Wallet Integration (Optional):**
+   - `NEXT_PUBLIC_XAMAN_API_KEY`: Xaman (XRPL) public API key
+   - `NEXT_PUBLIC_XAMAN_API_SECRET`: Xaman API secret
+     - Get credentials from: https://xumm.app/
+
+3. **Environment Variable Guidelines:**
+
+   - Variables with `NEXT_PUBLIC_` prefix are accessible in the browser (client-side)
+   - Variables without this prefix are only available on the server-side
+   - The application will warn you about missing optional variables in development mode
+
 ## Getting Started
 
-First, run the development server:
+After setting up your environment variables, run the development server:
 
 ```bash
 npm run dev

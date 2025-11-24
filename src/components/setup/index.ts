@@ -1,5 +1,5 @@
-export { Step1BasicInformation } from "./Step1BasicInformation";
-export { Step2AdditionalAuthentication } from "./Step2AdditionalAuthentication";
-export { Step3DataConsent } from "./Step3DataConsent";
-export { Step4CreditRank } from "./Step4CreditRank";
-export { Step5Congratulations } from "./Step5Congratulations";
+export { Step1BasicInformation } from "./step-1-basic-information";
+export { Step2AdditionalAuthentication } from "./step-2-additional-authentication";
+export { Step3DataConsent } from "./step-3-data-consent";
+export { Step4CreditRank } from "./step-4-credit-rank";
+export { Step5Congratulations } from "./step-5-congratulations";

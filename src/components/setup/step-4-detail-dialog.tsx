@@ -10,11 +10,11 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Skeleton } from "@/components/ui/skeleton";
+import { LoadingSkeleton } from "@/components/common/loading-skeleton";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useGetCreditDetails } from "./_hooks/use-get-credit-details";
-import { BalanceListTable } from "@/components/tables/BalanceListTable";
-import { DataTable } from "@/app/demo/_components/DataTable";
+import { BalanceListTable } from "@/components/tables/balance-list-table";
+import { TransactionTable } from "@/app/wallet-explorer/_components/transaction-table";
 import { useWalletStore } from "@/lib/stores/wallet-store";
 
 export function Step4DetailDialog() {
@@ -38,12 +38,7 @@ export function Step4DetailDialog() {
         <DialogTitle>Credit Details</DialogTitle>
         <DialogDescription>Credit Details</DialogDescription>
         {isLoading ? (
-          <div className="space-y-4">
-            <Skeleton className="h-10 w-full" />
-            <Skeleton className="h-64 w-full" />
-            <Skeleton className="h-64 w-full" />
-            <Skeleton className="h-32 w-full" />
-          </div>
+          <LoadingSkeleton variant="dialog-tabs" />
         ) : (
           <Tabs defaultValue="onchain" className="w-full">
             <TabsList className="w-full">
@@ -81,7 +76,7 @@ export function Step4DetailDialog() {
                 <Card>
                   <CardContent>
                     <CardTitle className="pb-4">Transactions</CardTitle>
-                    <DataTable
+                    <TransactionTable
                       transactions={transactions}
                       isLoading={isLoading}
                       isStale={false}

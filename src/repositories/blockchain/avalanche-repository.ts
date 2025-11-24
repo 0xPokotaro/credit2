@@ -2,19 +2,20 @@ import { Avalanche } from "@avalanche-sdk/chainkit";
 import type { Transaction, Balance } from "@/types";
 import type { IBlockchainRepository } from "./base-repository";
 import { formatTimestamp } from "@/utils/datetime";
-import { getAvalancheConfig } from "@/constants/blockchain";
+import { getAvalancheConfig } from "@/config/chains";
+import { serverEnv } from "@/config/env.server";
 
 /**
  * Avalancheチェーン用のRepository実装
  */
 export class AvalancheRepository implements IBlockchainRepository {
   private avalanche: Avalanche;
+  private config = getAvalancheConfig();
 
   constructor() {
-    const config = getAvalancheConfig();
     this.avalanche = new Avalanche({
-      apiKey: process.env.AVALANCHE_API_KEY,
-      chainId: config.chainId,
+      apiKey: serverEnv.AVALANCHE_API_KEY,
+      chainId: this.config.chainId,
     });
   }
 
@@ -32,7 +33,7 @@ export class AvalancheRepository implements IBlockchainRepository {
       const fee = BigInt(tx.gasUsed) * BigInt(tx.gasPrice);
 
       transactions.push({
-        chainName: "Avalanche C-Chain",
+        chainName: this.config.name,
         blockNumber: tx.blockNumber,
         timestamp: formatTimestamp(tx.blockTimestamp),
         txHash: tx.txHash,
@@ -40,7 +41,7 @@ export class AvalancheRepository implements IBlockchainRepository {
         to: tx.to.address,
         value: tx.value,
         fee: fee.toString(),
-        symbol: "AVAX",
+        symbol: this.config.nativeTokenSymbol,
       });
     }
 
@@ -58,11 +59,11 @@ export class AvalancheRepository implements IBlockchainRepository {
     const balanceWei = result.nativeTokenBalance.balance || "0";
 
     return {
-      chainName: "Avalanche C-Chain",
-      tokenSymbol: "AVAX",
+      chainName: this.config.name,
+      tokenSymbol: this.config.nativeTokenSymbol,
       balance: balanceWei,
       balanceJPY: 0,
-      decimals: 18,
+      decimals: this.config.nativeTokenDecimals,
     };
   }
 
@@ -71,11 +72,12 @@ export class AvalancheRepository implements IBlockchainRepository {
    * 登録されているコントラクトアドレスの残高のみを取得
    */
   async getErc20Balances(address: string): Promise<Balance[]> {
-    const config = getAvalancheConfig();
     // 登録されているコントラクトアドレスのリストを取得
     const registeredAddresses = Object.values(
-      config.contractAddresses || {},
-    ).map((addr) => addr.toLowerCase());
+      this.config.contractAddresses || {},
+    )
+      .filter((addr): addr is string => addr !== undefined)
+      .map((addr) => addr.toLowerCase());
 
     const result = await this.avalanche.data.evm.address.balances.listErc20({
       address: address,
@@ -106,7 +108,7 @@ export class AvalancheRepository implements IBlockchainRepository {
         }
 
         balances.push({
-          chainName: "Avalanche C-Chain",
+          chainName: this.config.name,
           tokenSymbol: balance.symbol,
           balance: balance.balance,
           balanceJPY: 0,
@@ -128,11 +130,12 @@ export class AvalancheRepository implements IBlockchainRepository {
     endBlock?: number,
     pageSize: number = 10,
   ): Promise<Transaction[]> {
-    const config = getAvalancheConfig();
     // 登録されているコントラクトアドレスのリストを取得
     const registeredAddresses = Object.values(
-      config.contractAddresses || {},
-    ).map((addr) => addr.toLowerCase());
+      this.config.contractAddresses || {},
+    )
+      .filter((addr): addr is string => addr !== undefined)
+      .map((addr) => addr.toLowerCase());
 
     const result = await this.avalanche.data.evm.address.transactions.listErc20(
       {
@@ -169,7 +172,7 @@ export class AvalancheRepository implements IBlockchainRepository {
         }
 
         transactions.push({
-          chainName: "Avalanche C-Chain",
+          chainName: this.config.name,
           blockNumber: tx.blockNumber,
           timestamp: formatTimestamp(tx.blockTimestamp),
           txHash: tx.txHash,

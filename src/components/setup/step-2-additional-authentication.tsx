@@ -5,6 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { WalletDialog } from "@/components/ui/wallet-dialog";
 import { useWalletStore } from "@/lib/stores/wallet-store";
+import {
+  getWalletDisplayName,
+  formatAddress,
+} from "@/lib/utils/wallet-display";
+import { CheckmarkSimpleIcon, SecurityLockIcon } from "@/components/icons";
 
 interface Step2AdditionalAuthenticationProps {
   onNext: () => void;
@@ -20,47 +25,6 @@ export function Step2AdditionalAuthentication({
 
   const handleWalletSelect = () => {
     // Wallet connection is handled by the store, no local state needed
-  };
-
-  const getWalletDisplayName = (type: string | null) => {
-    if (!type) return "";
-    switch (type) {
-      case "xaman":
-        return "Xaman";
-      case "metamask":
-        return "MetaMask";
-      case "sui":
-        return "Sui Wallet";
-      default:
-        return "Unknown";
-    }
-  };
-
-  const getChainDisplayName = (chainName: string | null) => {
-    if (!chainName) return "";
-    switch (chainName) {
-      case "xrp":
-        return "XRP Ledger";
-      case "ethereum":
-        return "Ethereum";
-      case "polygon":
-        return "Polygon";
-      case "bsc":
-        return "BSC";
-      case "optimism":
-        return "Optimism";
-      case "arbitrum":
-        return "Arbitrum";
-      case "base":
-        return "Base";
-      default:
-        return chainName;
-    }
-  };
-
-  const formatAddress = (addr: string | null) => {
-    if (!addr) return "";
-    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
   return (
@@ -148,19 +112,7 @@ export function Step2AdditionalAuthentication({
             </div>
             {isConnected && (
               <div className="flex items-center text-green-600 flex-shrink-0">
-                <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+                <CheckmarkSimpleIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             )}
           </div>
@@ -196,19 +148,7 @@ export function Step2AdditionalAuthentication({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="flex items-start">
               <div className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-cyan-500 rounded-lg mr-3 flex-shrink-0">
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
-                </svg>
+                <SecurityLockIcon className="w-3 h-3 sm:w-4 sm:h-4" />
               </div>
               <div>
                 <h4 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">
@@ -222,19 +162,7 @@ export function Step2AdditionalAuthentication({
 
             <div className="flex items-start">
               <div className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-cyan-500 rounded-lg mr-3 flex-shrink-0">
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
-                </svg>
+                <SecurityLockIcon className="w-3 h-3 sm:w-4 sm:h-4" />
               </div>
               <div>
                 <h4 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">

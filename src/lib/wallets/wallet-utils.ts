@@ -2,6 +2,7 @@ import { XamanClient } from "./xrpl/xaman";
 import { MetaMaskClient } from "./evm/metamask";
 import { SuiWalletClient } from "./sui/sui-wallet";
 import { useWalletStore } from "../stores/wallet-store";
+import { getChainConfigByChainId } from "@/config/chains";
 
 export class WalletManager {
   private xamanClient: XamanClient | null = null;
@@ -126,18 +127,8 @@ export class WalletManager {
   }
 
   private getChainName(chainId: string): string {
-    const chainIdMap: Record<string, string> = {
-      "0x1": "ethereum",
-      "0x89": "polygon",
-      "0x38": "bsc",
-      "0xa": "optimism",
-      "0xa4b1": "arbitrum",
-      "0x2105": "base",
-      "0xa86a": "Avalance C-Chain",
-      "0xa869": "Avalanche Fuji C-Chain",
-    };
-
-    return chainIdMap[chainId] || `chain-${chainId}`;
+    const config = getChainConfigByChainId(chainId);
+    return config?.name || `chain-${chainId}`;
   }
 
   // Event listeners for wallet changes

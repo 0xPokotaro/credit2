@@ -2,11 +2,11 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Step4DetailDialog } from "./Step4DetailDialog";
+import { LoadingSkeleton } from "@/components/common/loading-skeleton";
+import { Step4DetailDialog } from "./step-4-detail-dialog";
 import { useGetCreditDetails } from "./_hooks/use-get-credit-details";
 import { useWalletStore } from "@/lib/stores/wallet-store";
+import { WarningIcon } from "@/components/icons";
 
 interface Step4CreditRankProps {
   onNext: () => void;
@@ -34,16 +34,7 @@ export function Step4CreditRank({ onNext, onPrevious }: Step4CreditRankProps) {
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div className="text-center mb-8">
-              <div className="flex items-center justify-center mb-4">
-                <Spinner className="w-16 h-16 text-blue-600" />
-              </div>
-              <Skeleton className="h-8 w-48 mx-auto mb-2" />
-              <Skeleton className="h-16 w-32 mx-auto mb-2" />
-              <Skeleton className="h-6 w-40 mx-auto mb-4" />
-              <Skeleton className="h-2 w-32 mx-auto mb-4" />
-              <Skeleton className="h-6 w-64 mx-auto" />
-            </div>
+            <LoadingSkeleton variant="credit-score" />
           ) : (
             <div className="text-center mb-8">
               <div className="flex items-center justify-center mb-4">
@@ -73,24 +64,7 @@ export function Step4CreditRank({ onNext, onPrevious }: Step4CreditRankProps) {
           )}
 
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-white border border-gray-200 rounded-lg p-4">
-                <Skeleton className="h-6 w-40 mb-4" />
-                <div className="space-y-3">
-                  <Skeleton className="h-5 w-full" />
-                  <Skeleton className="h-5 w-full" />
-                  <Skeleton className="h-5 w-full" />
-                </div>
-              </div>
-              <div className="bg-white border border-gray-200 rounded-lg p-4">
-                <Skeleton className="h-6 w-40 mb-4" />
-                <div className="space-y-3">
-                  <Skeleton className="h-5 w-full" />
-                  <Skeleton className="h-5 w-full" />
-                  <Skeleton className="h-5 w-full" />
-                </div>
-              </div>
-            </div>
+            <LoadingSkeleton variant="credit-cards" />
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="bg-white border border-gray-200 rounded-lg p-4">
@@ -194,28 +168,12 @@ export function Step4CreditRank({ onNext, onPrevious }: Step4CreditRankProps) {
           )}
 
           {isLoading ? (
-            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-8">
-              <Skeleton className="h-6 w-40 mb-3" />
-              <div className="space-y-2">
-                <Skeleton className="h-5 w-full" />
-                <Skeleton className="h-5 w-full" />
-              </div>
-            </div>
+            <LoadingSkeleton variant="risk-alert" />
           ) : (
             <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-8">
               <div className="flex items-center mb-3">
                 <div className="w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center mr-3">
-                  <svg
-                    className="w-3 h-3 text-white"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <WarningIcon size={12} />
                 </div>
                 <h4 className="font-semibold text-gray-900">
                   Risk Alert Details
@@ -225,17 +183,7 @@ export function Step4CreditRank({ onNext, onPrevious }: Step4CreditRankProps) {
                 {data?.riskAlerts.map((alert) => (
                   <div key={alert.id} className="flex items-start">
                     <div className="w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
-                      <svg
-                        className="w-2 h-2 text-white"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
+                      <WarningIcon size={8} />
                     </div>
                     <span className="text-sm text-gray-700">
                       {alert.message}

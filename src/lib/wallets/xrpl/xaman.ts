@@ -1,4 +1,5 @@
 import { Xumm as Xaman } from "xumm";
+import { clientEnv } from "@/config/env.client";
 
 export class XamanClient {
   private xaman: Xaman | null = null;
@@ -6,8 +7,8 @@ export class XamanClient {
 
   constructor() {
     try {
-      const key = process.env.NEXT_PUBLIC_XAMAN_API_KEY as string;
-      const secret = process.env.NEXT_PUBLIC_XAMAN_API_SECRET as string;
+      const key = clientEnv.XAMAN_API_KEY;
+      const secret = clientEnv.XAMAN_API_SECRET;
 
       if (!key || !secret) {
         console.warn("Xaman API Key or Secret is not configured");
