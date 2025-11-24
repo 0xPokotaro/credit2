@@ -45,6 +45,7 @@ export function Step4DetailDialog() {
           <Tabs defaultValue="onchain" className="w-full">
             <TabsList className="w-full">
               <TabsTrigger value="onchain">On-chain</TabsTrigger>
+<<<<<<< HEAD
               <TabsTrigger value="sns">SNS</TabsTrigger>
             </TabsList>
             <TabsContent value="onchain" className="space-y-4">
@@ -56,14 +57,35 @@ export function Step4DetailDialog() {
                     <p className="text-4xl">
                       {totalBalanceUSD.toLocaleString()}
                     </p>
+=======
+            </TabsList>
+            <TabsContent value="onchain" className="space-y-4">
+              {/* ヘッダー */}
+              <div className="grid grid-cols-3 gap-4 pt-4">
+                <Card className="col-span-1">
+                  <CardContent>
+                    <CardTitle className="pb-4">総残高</CardTitle>
+                    <p className="text-4xl">100,000</p>
+>>>>>>> main
                   </CardContent>
                 </Card>
                 <Card className="col-span-1">
                   <CardContent>
+<<<<<<< HEAD
                     <CardTitle className="pb-4">総残高 JPY</CardTitle>
                     <p className="text-4xl">
                       {totalBalanceJPY.toLocaleString()}
                     </p>
+=======
+                    <CardTitle className="pb-4">総残高</CardTitle>
+                    <p className="text-4xl">100,000</p>
+                  </CardContent>
+                </Card>
+                <Card className="col-span-1">
+                  <CardContent>
+                    <CardTitle className="pb-4">総残高</CardTitle>
+                    <p className="text-4xl">100,000</p>
+>>>>>>> main
                   </CardContent>
                 </Card>
               </div>
@@ -87,11 +109,14 @@ export function Step4DetailDialog() {
                 </Card>
               </div>
             </TabsContent>
+<<<<<<< HEAD
             <TabsContent value="sns" className="space-y-4">
               <div className="flex items-center justify-center py-12">
                 <p className="text-lg text-gray-600">開発中</p>
               </div>
             </TabsContent>
+=======
+>>>>>>> main
           </Tabs>
         )}
       </DialogContent>
