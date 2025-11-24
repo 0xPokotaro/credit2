@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { GiftIcon, CheckmarkIcon, WarningIcon } from "@/components/icons";
 
 interface Step5CongratulationsProps {
   onNext: () => void;
@@ -18,19 +19,7 @@ export function Step5Congratulations({
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-green-800">
             <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
-              <svg
-                className="w-5 h-5 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-                />
-              </svg>
+              <GiftIcon size={20} />
             </div>
             Congratulations! You are eligible to use this service
           </CardTitle>
@@ -47,65 +36,25 @@ export function Step5Congratulations({
             </h4>
             <div className="space-y-2">
               <div className="flex items-center">
-                <svg
-                  className="w-5 h-5 text-green-600 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <CheckmarkIcon className="w-5 h-5 text-green-600 mr-2" />
                 <span className="text-sm text-gray-700">
                   0% deposit requirement
                 </span>
               </div>
               <div className="flex items-center">
-                <svg
-                  className="w-5 h-5 text-green-600 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <CheckmarkIcon className="w-5 h-5 text-green-600 mr-2" />
                 <span className="text-sm text-gray-700">
                   Priority customer support
                 </span>
               </div>
               <div className="flex items-center">
-                <svg
-                  className="w-5 h-5 text-green-600 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <CheckmarkIcon className="w-5 h-5 text-green-600 mr-2" />
                 <span className="text-sm text-gray-700">
                   Enhanced credit limits
                 </span>
               </div>
               <div className="flex items-center">
-                <svg
-                  className="w-5 h-5 text-green-600 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <CheckmarkIcon className="w-5 h-5 text-green-600 mr-2" />
                 <span className="text-sm text-gray-700">
                   Exclusive partner benefits
                 </span>
@@ -165,49 +114,19 @@ export function Step5Congratulations({
           <CardContent>
             <div className="space-y-2">
               <div className="flex items-center">
-                <svg
-                  className="w-4 h-4 text-green-600 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <CheckmarkIcon size={16} className="w-4 h-4 text-green-600 mr-2" />
                 <span className="text-sm text-gray-700">
                   Identity verification completed
                 </span>
               </div>
               <div className="flex items-center">
-                <svg
-                  className="w-4 h-4 text-green-600 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <CheckmarkIcon size={16} className="w-4 h-4 text-green-600 mr-2" />
                 <span className="text-sm text-gray-700">
                   Data processing via ZKP security
                 </span>
               </div>
               <div className="flex items-center">
-                <svg
-                  className="w-4 h-4 text-green-600 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <CheckmarkIcon size={16} className="w-4 h-4 text-green-600 mr-2" />
                 <span className="text-sm text-gray-700">
                   Multi-source assessment completed
                 </span>
@@ -221,17 +140,7 @@ export function Step5Congratulations({
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-yellow-800">
             <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center">
-              <svg
-                className="w-3 h-3 text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              <WarningIcon size={12} />
             </div>
             Risk Assessment Summary
           </CardTitle>

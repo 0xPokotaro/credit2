@@ -5,6 +5,11 @@ import { walletManager } from "@/lib/wallets/wallet-utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { LogOut, Wallet } from "lucide-react";
+import {
+  getWalletDisplayName,
+  getChainDisplayName,
+  shortenAddress,
+} from "@/lib/utils/wallet-display";
 
 export function WalletStatus() {
   const { address, chain, walletType, isConnected, isLoading } =
@@ -27,42 +32,6 @@ export function WalletStatus() {
     );
   }
 
-  const formatAddress = (addr: string) => {
-    return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
-  };
-
-  const getWalletDisplayName = (type: string) => {
-    switch (type) {
-      case "xaman":
-        return "Xaman";
-      case "metamask":
-        return "MetaMask";
-      default:
-        return "Unknown";
-    }
-  };
-
-  const getChainDisplayName = (chainName: string) => {
-    switch (chainName) {
-      case "xrp":
-        return "XRP Ledger";
-      case "ethereum":
-        return "Ethereum";
-      case "polygon":
-        return "Polygon";
-      case "bsc":
-        return "BSC";
-      case "optimism":
-        return "Optimism";
-      case "arbitrum":
-        return "Arbitrum";
-      case "base":
-        return "Base";
-      default:
-        return chainName;
-    }
-  };
-
   return (
     <div className="flex items-center space-x-3">
       <div className="flex items-center space-x-2">
@@ -71,7 +40,7 @@ export function WalletStatus() {
           <div className="font-medium text-gray-900">
             {getWalletDisplayName(walletType!)}
           </div>
-          <div className="text-gray-500">{formatAddress(address!)}</div>
+          <div className="text-gray-500">{shortenAddress(address!)}</div>
         </div>
       </div>
 

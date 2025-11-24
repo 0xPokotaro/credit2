@@ -2,14 +2,21 @@ import { XamanClient } from "./xrpl/xaman";
 import { MetaMaskClient } from "./evm/metamask";
 import { SuiWalletClient } from "./sui/sui-wallet";
 import { useWalletStore } from "../stores/wallet-store";
+import { getChainConfigByChainId } from "@/config/chains";
 
 export class WalletManager {
-  private xamanClient: XamanClient;
+  private xamanClient: XamanClient | null = null;
   private metaMaskClient: MetaMaskClient;
   private suiClient: SuiWalletClient;
 
   constructor() {
-    this.xamanClient = new XamanClient();
+    try {
+      this.xamanClient = new XamanClient();
+    } catch (error) {
+      console.error("Failed to initialize XamanClient:", error);
+      this.xamanClient = null;
+    }
+
     this.metaMaskClient = new MetaMaskClient();
     this.suiClient = new SuiWalletClient();
   }
@@ -20,6 +27,12 @@ export class WalletManager {
     try {
       setLoading(true);
       setError(null);
+
+      if (!this.xamanClient) {
+        throw new Error(
+          "Xaman is not available. Please configure API Key and Secret.",
+        );
+      }
 
       const response = await this.xamanClient.authorize();
 
@@ -94,7 +107,9 @@ export class WalletManager {
 
     try {
       if (walletType === "xaman") {
-        await this.xamanClient.logout();
+        if (this.xamanClient) {
+          await this.xamanClient.logout();
+        }
       } else if (walletType === "metamask") {
         // MetaMask doesn't have a logout method, just clear the state
         this.metaMaskClient.removeAllListeners();
@@ -112,16 +127,8 @@ export class WalletManager {
   }
 
   private getChainName(chainId: string): string {
-    const chainIdMap: Record<string, string> = {
-      "0x1": "ethereum",
-      "0x89": "polygon",
-      "0x38": "bsc",
-      "0xa": "optimism",
-      "0xa4b1": "arbitrum",
-      "0x2105": "base",
-    };
-
-    return chainIdMap[chainId] || `chain-${chainId}`;
+    const config = getChainConfigByChainId(chainId);
+    return config?.name || `chain-${chainId}`;
   }
 
   // Event listeners for wallet changes

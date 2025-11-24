@@ -4,6 +4,12 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { WalletDialog } from "@/components/ui/wallet-dialog";
+import { useWalletStore } from "@/lib/stores/wallet-store";
+import {
+  getWalletDisplayName,
+  formatAddress,
+} from "@/lib/utils/wallet-display";
+import { CheckmarkSimpleIcon, SecurityLockIcon } from "@/components/icons";
 
 interface Step2AdditionalAuthenticationProps {
   onNext: () => void;
@@ -15,21 +21,10 @@ export function Step2AdditionalAuthentication({
   onPrevious,
 }: Step2AdditionalAuthenticationProps) {
   const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
-  const [selectedWallet, setSelectedWallet] = useState<{
-    name: string;
-    type: string;
-  } | null>(null);
+  const { isConnected, walletType, address, chain } = useWalletStore();
 
-  const handleWalletSelect = (wallet: {
-    id: string;
-    name: string;
-    icon: React.ReactNode;
-    description: string;
-  }) => {
-    setSelectedWallet({
-      name: wallet.name,
-      type: wallet.id === "xaman" ? "XRP Ledger" : "EVM",
-    });
+  const handleWalletSelect = () => {
+    // Wallet connection is handled by the store, no local state needed
   };
 
   return (
@@ -60,7 +55,9 @@ export function Step2AdditionalAuthentication({
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Twitter (X)</h3>
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+                X (Twitter)
+              </h3>
               <p className="text-xs sm:text-sm text-gray-600">
                 Connect your Twitter account for social behavior analysis
               </p>
@@ -78,7 +75,9 @@ export function Step2AdditionalAuthentication({
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">LinkedIn</h3>
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+                LinkedIn
+              </h3>
               <p className="text-xs sm:text-sm text-gray-600">
                 Verify professional credentials and network
               </p>
@@ -102,28 +101,18 @@ export function Step2AdditionalAuthentication({
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Web3 Wallet</h3>
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+                Web3 Wallet
+              </h3>
               <p className="text-xs sm:text-sm text-gray-600">
-                {selectedWallet
-                  ? `Connected: ${selectedWallet.name} (${selectedWallet.type})`
+                {isConnected && walletType
+                  ? `Connected: ${getWalletDisplayName(walletType)}${address ? ` - ${formatAddress(address)}` : ""}`
                   : "Connect your crypto wallet for on-chain history"}
               </p>
             </div>
-            {selectedWallet && (
+            {isConnected && (
               <div className="flex items-center text-green-600 flex-shrink-0">
-                <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
+                <CheckmarkSimpleIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
             )}
           </div>
@@ -145,7 +134,9 @@ export function Step2AdditionalAuthentication({
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">DID Verification</h3>
+              <h3 className="font-semibold text-gray-900 text-sm sm:text-base">
+                DID Verification
+              </h3>
               <p className="text-xs sm:text-sm text-gray-600">
                 Decentralized identity verification
               </p>
@@ -157,19 +148,7 @@ export function Step2AdditionalAuthentication({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="flex items-start">
               <div className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-cyan-500 rounded-lg mr-3 flex-shrink-0">
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
-                </svg>
+                <SecurityLockIcon className="w-3 h-3 sm:w-4 sm:h-4" />
               </div>
               <div>
                 <h4 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">
@@ -183,19 +162,7 @@ export function Step2AdditionalAuthentication({
 
             <div className="flex items-start">
               <div className="flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 bg-cyan-500 rounded-lg mr-3 flex-shrink-0">
-                <svg
-                  className="w-3 h-3 sm:w-4 sm:h-4 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                  />
-                </svg>
+                <SecurityLockIcon className="w-3 h-3 sm:w-4 sm:h-4" />
               </div>
               <div>
                 <h4 className="font-semibold text-gray-900 mb-1 text-sm sm:text-base">
@@ -211,10 +178,16 @@ export function Step2AdditionalAuthentication({
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 pt-4 sm:pt-6">
-          <Button variant="outline" onClick={onPrevious} className="w-full sm:w-auto">
+          <Button
+            variant="outline"
+            onClick={onPrevious}
+            className="w-full sm:w-auto"
+          >
             Back
           </Button>
-          <Button onClick={onNext} className="w-full sm:w-auto">Proceed to Data Consent</Button>
+          <Button onClick={onNext} className="w-full sm:w-auto">
+            Proceed to Data Consent
+          </Button>
         </div>
       </CardContent>
 
