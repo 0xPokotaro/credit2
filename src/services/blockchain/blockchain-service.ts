@@ -8,10 +8,12 @@ import type { IBlockchainRepository } from "@/repositories/blockchain/base-repos
  */
 export class BlockchainService {
   private repositories: IBlockchainRepository[];
+  private avalancheRepository: AvalancheRepository;
 
   constructor() {
+    this.avalancheRepository = new AvalancheRepository();
     this.repositories = [
-      new AvalancheRepository(),
+      this.avalancheRepository,
       // 将来的に new EthereumRepository(), new SuiRepository() などを追加
     ];
   }
@@ -38,6 +40,20 @@ export class BlockchainService {
       }
     }
 
+    // ERC20トランザクションも取得
+    try {
+      const erc20Transactions =
+        await this.avalancheRepository.getErc20Transactions(address);
+      transactions.push(...erc20Transactions);
+    } catch (error) {
+      console.error("Failed to get ERC20 transactions:", error);
+    }
+
+    // blockNumberで降順ソート
+    transactions.sort((a, b) => {
+      return Number(b.blockNumber) - Number(a.blockNumber);
+    });
+
     return transactions;
   }
 
@@ -61,6 +77,15 @@ export class BlockchainService {
           result.reason,
         );
       }
+    }
+
+    // ERC20残高も取得
+    try {
+      const erc20Balances =
+        await this.avalancheRepository.getErc20Balances(address);
+      balances.push(...erc20Balances);
+    } catch (error) {
+      console.error("Failed to get ERC20 balances:", error);
     }
 
     return balances;

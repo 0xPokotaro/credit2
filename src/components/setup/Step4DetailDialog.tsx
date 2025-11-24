@@ -85,6 +85,7 @@ export function Step4DetailDialog() {
                       transactions={transactions}
                       isLoading={isLoading}
                       isStale={false}
+                      address={address}
                     />
                   </CardContent>
                 </Card>

@@ -7,44 +7,19 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const address = searchParams.get("evm_address");
 
-  // デモ用の固定値（他のチェーン用）
-  const otherBalances: Balance[] = [
-    {
-      chainName: "Ethereum",
-      tokenSymbol: "ETH",
-      balance: "1000000000000000000", // 1 ETH
-      balanceJPY: 350000, // 35万円
-    },
-    {
-      chainName: "Polygon",
-      tokenSymbol: "MATIC",
-      balance: "5000000000000000000", // 5 MATIC
-      balanceJPY: 50000, // 5万円
-    },
-    {
-      chainName: "BSC",
-      tokenSymbol: "BNB",
-      balance: "1000000000000000000", // 1 BNB
-      balanceJPY: 80000, // 8万円
-    },
-  ];
-
   // Avalancheの実データを取得（addressが指定されている場合）
-  let avalancheBalances: Balance[] = [];
+  let balances: Balance[] = [];
   let avalancheTransactions: Transaction[] = [];
 
   if (address) {
     try {
-      avalancheBalances = await blockchainService.getBalances(address);
+      balances = await blockchainService.getBalances(address);
       avalancheTransactions = await blockchainService.getTransactions(address);
     } catch (error) {
       console.error("Failed to get Avalanche data:", error);
-      // エラーが発生しても他のチェーンのデータは返す
+      // エラーが発生した場合は空配列を返す
     }
   }
-
-  // 全チェーンのデータを統合
-  const balances = [...otherBalances, ...avalancheBalances];
   const transactions = [...avalancheTransactions];
 
   const totalBalanceJPY = balances.reduce((sum, b) => sum + b.balanceJPY, 0);

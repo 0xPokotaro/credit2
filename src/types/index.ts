@@ -30,6 +30,12 @@ export interface Transaction {
 
   /** Native token symbol (e.g., 'AVAX', 'ETH', 'MATIC') */
   symbol: string;
+
+  /** Token contract address (for ERC20 tokens, optional) */
+  tokenContractAddress?: string;
+
+  /** Token decimals (for ERC20 tokens, optional, defaults to 18 for native tokens) */
+  tokenDecimals?: number;
 }
 
 /**
@@ -63,6 +69,7 @@ export interface Balance {
   tokenSymbol: string;
   balance: string; // 最小単位
   balanceJPY: number; // JPY換算額
+  decimals?: number; // トークンのdecimals（オプショナル、デフォルト18桁）
 }
 
 /**

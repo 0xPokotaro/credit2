@@ -21,3 +21,29 @@ export function getExplorerUrl(chainName: string, txHash: string): string {
   // 将来的に他のチェーンも追加可能
   return "#";
 }
+
+// チェーン名とアドレスからエクスプローラーURLを生成
+export function getExplorerAddressUrl(
+  chainName: string,
+  address: string,
+): string {
+  if (chainName === "Avalanche C-Chain") {
+    const config = getAvalancheConfig();
+    return `${config.EXPLORER_URL}/address/${address}`;
+  }
+  // 将来的に他のチェーンも追加可能
+  return "#";
+}
+
+// チェーン名とトークンコントラクトアドレスからエクスプローラーURLを生成
+export function getExplorerTokenUrl(
+  chainName: string,
+  contractAddress: string,
+): string {
+  if (chainName === "Avalanche C-Chain") {
+    const config = getAvalancheConfig();
+    return `${config.EXPLORER_URL}/token/${contractAddress}`;
+  }
+  // 将来的に他のチェーンも追加可能
+  return "#";
+}

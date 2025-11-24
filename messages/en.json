@@ -40,5 +40,8 @@
     "privacyPolicy": "Privacy Policy",
     "contactUs": "Contact Us",
     "copyright": "© 2025 Credit 2.0. All rights reserved."
+  },
+  "TransactionTable": {
+    "self": "Self"
   }
 }

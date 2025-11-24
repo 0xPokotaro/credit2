@@ -40,5 +40,8 @@
     "privacyPolicy": "プライバシーポリシー",
     "contactUs": "お問い合わせ",
     "copyright": "© 2025 Credit 2.0. 全著作権所有。"
+  },
+  "TransactionTable": {
+    "self": "自分"
   }
 }
