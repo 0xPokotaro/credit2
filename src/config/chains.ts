@@ -13,6 +13,7 @@ export type WalletType = "metamask" | "xaman" | "sui";
  */
 export interface ContractAddresses {
   usdcoin?: string;
+  jpyc?: string;
   [key: string]: string | undefined;
 }
 
@@ -82,6 +83,7 @@ export const AVALANCHE_C_MAINNET: ChainConfig = {
   explorerName: "Avalanche Explorer",
   contractAddresses: {
     usdcoin: "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    jpyc: "0xE7C3D8C9a439feDe00D2600032D5dB0Be71C3c29",
   },
   supportedWallets: ["metamask"],
 };
@@ -105,6 +107,8 @@ export const AVALANCHE_C_TESTNET: ChainConfig = {
   explorerName: "Avalanche Fuji Explorer",
   contractAddresses: {
     usdcoin: "0x5425890298aed601595a70AB815c96711a31Bc65",
+    // TODO: Add JPYC testnet address when available
+    // jpyc: "0x...",
   },
   supportedWallets: ["metamask"],
 };
