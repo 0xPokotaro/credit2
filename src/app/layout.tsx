@@ -1,11 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Topbar } from "@/components/layout/topbar";
-import { WalletProvider } from "@/components/wallet/wallet-provider";
-import { Providers } from "./providers";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import { cookies } from "next/headers";
 
 const geistSans = Geist({
@@ -30,21 +24,13 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const locale = cookieStore.get("locale")?.value || "en";
-  const messages = await getMessages();
 
   return (
     <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Providers>
-            <WalletProvider>
-              <Topbar />
-              {children}
-            </WalletProvider>
-          </Providers>
-        </NextIntlClientProvider>
+        {children}
       </body>
     </html>
   );
