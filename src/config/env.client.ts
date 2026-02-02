@@ -21,8 +21,8 @@ export interface ClientEnv {
  * Optional client-side environment variables
  */
 const OPTIONAL_CLIENT_ENV_VARS = [
-  'NEXT_PUBLIC_XAMAN_API_KEY',
-  'NEXT_PUBLIC_XAMAN_API_SECRET',
+  "NEXT_PUBLIC_XAMAN_API_KEY",
+  "NEXT_PUBLIC_XAMAN_API_SECRET",
 ] as const;
 
 /**
@@ -34,7 +34,7 @@ function validateClientEnv(): ClientEnv {
   const warnings: string[] = [];
 
   // Check optional variables and warn if missing (only in development)
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     for (const varName of OPTIONAL_CLIENT_ENV_VARS) {
       if (!process.env[varName]) {
         warnings.push(`${varName} is not set (optional)`);
@@ -43,9 +43,9 @@ function validateClientEnv(): ClientEnv {
 
     // Log warnings in development
     if (warnings.length > 0) {
-      console.warn('\n⚠️  Client Environment Variable Warnings:');
-      warnings.forEach(warning => console.warn(`   - ${warning}`));
-      console.warn('');
+      console.warn("\n⚠️  Client Environment Variable Warnings:");
+      warnings.forEach((warning) => console.warn(`   - ${warning}`));
+      console.warn("");
     }
   }
 

@@ -51,7 +51,9 @@ export function LoadingSkeleton({
 
   if (variant === "credit-cards") {
     return (
-      <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-6 mb-8", className)}>
+      <div
+        className={cn("grid grid-cols-1 md:grid-cols-2 gap-6 mb-8", className)}
+      >
         {[...Array(2)].map((_, index) => (
           <div
             key={index}
@@ -74,7 +76,7 @@ export function LoadingSkeleton({
       <div
         className={cn(
           "bg-orange-50 border border-orange-200 rounded-lg p-4 mb-8",
-          className
+          className,
         )}
       >
         <Skeleton className="h-6 w-40 mb-3" />

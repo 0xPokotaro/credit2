@@ -81,7 +81,10 @@ export function HeroSection() {
             <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <CheckmarkIcon size={12} className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
+                  <CheckmarkIcon
+                    size={12}
+                    className="w-2 h-2 sm:w-3 sm:h-3 text-white"
+                  />
                 </div>
                 <span className="text-sm sm:text-base text-gray-700 font-medium">
                   {t("feature1")}
@@ -89,7 +92,10 @@ export function HeroSection() {
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <CheckmarkIcon size={12} className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
+                  <CheckmarkIcon
+                    size={12}
+                    className="w-2 h-2 sm:w-3 sm:h-3 text-white"
+                  />
                 </div>
                 <span className="text-sm sm:text-base text-gray-700 font-medium">
                   {t("feature2")}
@@ -97,7 +103,10 @@ export function HeroSection() {
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <CheckmarkIcon size={12} className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
+                  <CheckmarkIcon
+                    size={12}
+                    className="w-2 h-2 sm:w-3 sm:h-3 text-white"
+                  />
                 </div>
                 <span className="text-sm sm:text-base text-gray-700 font-medium">
                   {t("feature3")}

@@ -124,10 +124,7 @@ export const ETHEREUM_MAINNET: ChainConfig = {
   chainIdHex: "0x1",
   nativeTokenSymbol: "ETH",
   nativeTokenDecimals: 18,
-  rpcUrls: [
-    "https://eth.llamarpc.com",
-    "https://ethereum.publicnode.com",
-  ],
+  rpcUrls: ["https://eth.llamarpc.com", "https://ethereum.publicnode.com"],
   explorerUrl: "https://etherscan.io",
   explorerName: "Etherscan",
   contractAddresses: {},
@@ -145,10 +142,7 @@ export const POLYGON_MAINNET: ChainConfig = {
   chainIdHex: "0x89",
   nativeTokenSymbol: "MATIC",
   nativeTokenDecimals: 18,
-  rpcUrls: [
-    "https://polygon-rpc.com",
-    "https://polygon-bor.publicnode.com",
-  ],
+  rpcUrls: ["https://polygon-rpc.com", "https://polygon-bor.publicnode.com"],
   explorerUrl: "https://polygonscan.com",
   explorerName: "PolygonScan",
   contractAddresses: {},
@@ -166,10 +160,7 @@ export const BSC_MAINNET: ChainConfig = {
   chainIdHex: "0x38",
   nativeTokenSymbol: "BNB",
   nativeTokenDecimals: 18,
-  rpcUrls: [
-    "https://bsc-dataseed.binance.org",
-    "https://bsc.publicnode.com",
-  ],
+  rpcUrls: ["https://bsc-dataseed.binance.org", "https://bsc.publicnode.com"],
   explorerUrl: "https://bscscan.com",
   explorerName: "BscScan",
   contractAddresses: {},
@@ -187,10 +178,7 @@ export const OPTIMISM_MAINNET: ChainConfig = {
   chainIdHex: "0xa",
   nativeTokenSymbol: "ETH",
   nativeTokenDecimals: 18,
-  rpcUrls: [
-    "https://mainnet.optimism.io",
-    "https://optimism.publicnode.com",
-  ],
+  rpcUrls: ["https://mainnet.optimism.io", "https://optimism.publicnode.com"],
   explorerUrl: "https://optimistic.etherscan.io",
   explorerName: "Optimism Explorer",
   contractAddresses: {},
@@ -229,10 +217,7 @@ export const BASE_MAINNET: ChainConfig = {
   chainIdHex: "0x2105",
   nativeTokenSymbol: "ETH",
   nativeTokenDecimals: 18,
-  rpcUrls: [
-    "https://mainnet.base.org",
-    "https://base.publicnode.com",
-  ],
+  rpcUrls: ["https://mainnet.base.org", "https://base.publicnode.com"],
   explorerUrl: "https://basescan.org",
   explorerName: "BaseScan",
   contractAddresses: {},
@@ -249,10 +234,7 @@ export const XRP_MAINNET: ChainConfig = {
   chainId: "xrp",
   nativeTokenSymbol: "XRP",
   nativeTokenDecimals: 6,
-  rpcUrls: [
-    "https://s1.ripple.com:51234",
-    "https://xrplcluster.com",
-  ],
+  rpcUrls: ["https://s1.ripple.com:51234", "https://xrplcluster.com"],
   explorerUrl: "https://livenet.xrpl.org",
   explorerName: "XRP Ledger Explorer",
   contractAddresses: {},
@@ -269,9 +251,7 @@ export const SUI_MAINNET: ChainConfig = {
   chainId: "sui",
   nativeTokenSymbol: "SUI",
   nativeTokenDecimals: 9,
-  rpcUrls: [
-    "https://fullnode.mainnet.sui.io:443",
-  ],
+  rpcUrls: ["https://fullnode.mainnet.sui.io:443"],
   explorerUrl: "https://suiexplorer.com",
   explorerName: "Sui Explorer",
   contractAddresses: {},
@@ -331,34 +311,40 @@ export const CHAIN_NAME_MAP: Record<string, ChainConfig> = {
   "Avalanche C-Chain": AVALANCHE_C_MAINNET,
   "Avalanche Fuji C-Chain": AVALANCHE_C_TESTNET,
   "Avalance C-Chain": AVALANCHE_C_MAINNET, // Typo in wallet-utils.ts
-  "ethereum": ETHEREUM_MAINNET,
-  "polygon": POLYGON_MAINNET,
-  "bsc": BSC_MAINNET,
-  "optimism": OPTIMISM_MAINNET,
-  "arbitrum": ARBITRUM_MAINNET,
-  "base": BASE_MAINNET,
-  "xrp": XRP_MAINNET,
-  "sui": SUI_MAINNET,
+  ethereum: ETHEREUM_MAINNET,
+  polygon: POLYGON_MAINNET,
+  bsc: BSC_MAINNET,
+  optimism: OPTIMISM_MAINNET,
+  arbitrum: ARBITRUM_MAINNET,
+  base: BASE_MAINNET,
+  xrp: XRP_MAINNET,
+  sui: SUI_MAINNET,
 };
 
 /**
  * Get chain configuration by chain ID (supports both hex and decimal formats)
  */
-export function getChainConfigByChainId(chainId: string): ChainConfig | undefined {
+export function getChainConfigByChainId(
+  chainId: string,
+): ChainConfig | undefined {
   return CHAIN_ID_MAP[chainId] || CHAIN_ID_MAP[chainId.toLowerCase()];
 }
 
 /**
  * Get chain configuration by chain identifier
  */
-export function getChainConfig(chainIdentifier: string): ChainConfig | undefined {
+export function getChainConfig(
+  chainIdentifier: string,
+): ChainConfig | undefined {
   return SUPPORTED_CHAINS[chainIdentifier];
 }
 
 /**
  * Get chain configuration by chain name (for backward compatibility)
  */
-export function getChainConfigByName(chainName: string): ChainConfig | undefined {
+export function getChainConfigByName(
+  chainName: string,
+): ChainConfig | undefined {
   return CHAIN_NAME_MAP[chainName];
 }
 
@@ -373,8 +359,8 @@ export function getSupportedChains(): ChainConfig[] {
  * Get chains supported by a specific wallet type
  */
 export function getChainsByWallet(walletType: WalletType): ChainConfig[] {
-  return getSupportedChains().filter(chain =>
-    chain.supportedWallets.includes(walletType)
+  return getSupportedChains().filter((chain) =>
+    chain.supportedWallets.includes(walletType),
   );
 }
 
@@ -382,14 +368,18 @@ export function getChainsByWallet(walletType: WalletType): ChainConfig[] {
  * Get EVM chains only
  */
 export function getEvmChains(): ChainConfig[] {
-  return getSupportedChains().filter(chain => chain.chainIdHex !== undefined);
+  return getSupportedChains().filter((chain) => chain.chainIdHex !== undefined);
 }
 
 /**
  * Get block explorer URL for a transaction
  */
-export function getExplorerTxUrl(chainIdentifier: string, txHash: string): string {
-  const config = getChainConfig(chainIdentifier) || getChainConfigByName(chainIdentifier);
+export function getExplorerTxUrl(
+  chainIdentifier: string,
+  txHash: string,
+): string {
+  const config =
+    getChainConfig(chainIdentifier) || getChainConfigByName(chainIdentifier);
   if (!config) {
     console.warn(`No chain config found for: ${chainIdentifier}`);
     return "#";
@@ -400,8 +390,12 @@ export function getExplorerTxUrl(chainIdentifier: string, txHash: string): strin
 /**
  * Get block explorer URL for an address
  */
-export function getExplorerAddressUrl(chainIdentifier: string, address: string): string {
-  const config = getChainConfig(chainIdentifier) || getChainConfigByName(chainIdentifier);
+export function getExplorerAddressUrl(
+  chainIdentifier: string,
+  address: string,
+): string {
+  const config =
+    getChainConfig(chainIdentifier) || getChainConfigByName(chainIdentifier);
   if (!config) {
     console.warn(`No chain config found for: ${chainIdentifier}`);
     return "#";
@@ -412,8 +406,12 @@ export function getExplorerAddressUrl(chainIdentifier: string, address: string):
 /**
  * Get block explorer URL for a token contract
  */
-export function getExplorerTokenUrl(chainIdentifier: string, contractAddress: string): string {
-  const config = getChainConfig(chainIdentifier) || getChainConfigByName(chainIdentifier);
+export function getExplorerTokenUrl(
+  chainIdentifier: string,
+  contractAddress: string,
+): string {
+  const config =
+    getChainConfig(chainIdentifier) || getChainConfigByName(chainIdentifier);
   if (!config) {
     console.warn(`No chain config found for: ${chainIdentifier}`);
     return "#";
@@ -426,9 +424,7 @@ export function getExplorerTokenUrl(chainIdentifier: string, contractAddress: st
  * Returns mainnet in production, testnet otherwise
  */
 export function getAvalancheConfig(): ChainConfig {
-  return isProduction()
-    ? AVALANCHE_C_MAINNET
-    : AVALANCHE_C_TESTNET;
+  return isProduction() ? AVALANCHE_C_MAINNET : AVALANCHE_C_TESTNET;
 }
 
 /**

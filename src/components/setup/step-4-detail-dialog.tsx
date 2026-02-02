@@ -58,7 +58,10 @@ function exportBalancesToCSV(balances: Balance[]) {
   const link = document.createElement("a");
   const url = URL.createObjectURL(blob);
   link.setAttribute("href", url);
-  link.setAttribute("download", `balances_${new Date().toISOString().split("T")[0]}.csv`);
+  link.setAttribute(
+    "download",
+    `balances_${new Date().toISOString().split("T")[0]}.csv`,
+  );
   link.style.visibility = "hidden";
   document.body.appendChild(link);
   link.click();
@@ -158,88 +161,90 @@ export function Step4DetailDialog() {
       <DialogTrigger asChild>
         <Button variant="outline">View Details</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-7xl">
+      <DialogContent className="sm:max-w-7xl max-h-[90vh] flex flex-col overflow-hidden">
         <DialogTitle>Credit Details</DialogTitle>
         <DialogDescription>Credit Details</DialogDescription>
-        {isLoading ? (
-          <LoadingSkeleton variant="dialog-tabs" />
-        ) : (
-          <Tabs defaultValue="onchain" className="w-full">
-            <TabsList className="w-full">
-              <TabsTrigger value="onchain">On-chain</TabsTrigger>
-              <TabsTrigger value="sns">SNS</TabsTrigger>
-            </TabsList>
-            <TabsContent value="onchain" className="space-y-4">
-              {/* ヘッダー */}
-              <div className="grid grid-cols-2 gap-4 pt-4">
-                <Card className="col-span-1">
-                  <CardContent>
-                    <CardTitle className="pb-4">総残高 USD</CardTitle>
-                    <p className="text-4xl">
-                      {totalBalanceUSD.toLocaleString()}
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card className="col-span-1">
-                  <CardContent>
-                    <CardTitle className="pb-4">総残高 JPY</CardTitle>
-                    <p className="text-4xl">
-                      {totalBalanceJPY.toLocaleString()}
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-              <div className="grid grid-cols-1 gap-4">
-                <Card>
-                  <CardContent>
-                    <div className="flex items-center justify-between pb-4">
-                      <CardTitle>Balances</CardTitle>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => exportBalancesToCSV(balances)}
-                        disabled={balances.length === 0}
-                      >
-                        <Download className="mr-2 h-4 w-4" />
-                        Download CSV
-                      </Button>
-                    </div>
-                    <BalanceListTable balances={balances} />
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent>
-                    <div className="flex items-center justify-between pb-4">
-                      <CardTitle>Transactions</CardTitle>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() =>
-                          exportTransactionsToCSV(transactions, address)
-                        }
-                        disabled={transactions.length === 0}
-                      >
-                        <Download className="mr-2 h-4 w-4" />
-                        Download CSV
-                      </Button>
-                    </div>
-                    <TransactionTable
-                      transactions={transactions}
-                      isLoading={isLoading}
-                      isStale={false}
-                      address={address}
-                    />
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-            <TabsContent value="sns" className="space-y-4">
-              <div className="flex items-center justify-center py-12">
-                <p className="text-lg text-gray-600">開発中</p>
-              </div>
-            </TabsContent>
-          </Tabs>
-        )}
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          {isLoading ? (
+            <LoadingSkeleton variant="dialog-tabs" />
+          ) : (
+            <Tabs defaultValue="onchain" className="w-full">
+              <TabsList className="w-full">
+                <TabsTrigger value="onchain">On-chain</TabsTrigger>
+                <TabsTrigger value="sns">SNS</TabsTrigger>
+              </TabsList>
+              <TabsContent value="onchain" className="space-y-4">
+                {/* ヘッダー */}
+                <div className="grid grid-cols-2 gap-4 pt-4">
+                  <Card className="col-span-1">
+                    <CardContent>
+                      <CardTitle className="pb-4">総残高 USD</CardTitle>
+                      <p className="text-4xl">
+                        {totalBalanceUSD.toLocaleString()}
+                      </p>
+                    </CardContent>
+                  </Card>
+                  <Card className="col-span-1">
+                    <CardContent>
+                      <CardTitle className="pb-4">総残高 JPY</CardTitle>
+                      <p className="text-4xl">
+                        {totalBalanceJPY.toLocaleString()}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+                <div className="grid grid-cols-1 gap-4">
+                  <Card>
+                    <CardContent>
+                      <div className="flex items-center justify-between pb-4">
+                        <CardTitle>Balances</CardTitle>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => exportBalancesToCSV(balances)}
+                          disabled={balances.length === 0}
+                        >
+                          <Download className="mr-2 h-4 w-4" />
+                          Download CSV
+                        </Button>
+                      </div>
+                      <BalanceListTable balances={balances} />
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent>
+                      <div className="flex items-center justify-between pb-4">
+                        <CardTitle>Transactions</CardTitle>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            exportTransactionsToCSV(transactions, address)
+                          }
+                          disabled={transactions.length === 0}
+                        >
+                          <Download className="mr-2 h-4 w-4" />
+                          Download CSV
+                        </Button>
+                      </div>
+                      <TransactionTable
+                        transactions={transactions}
+                        isLoading={isLoading}
+                        isStale={false}
+                        address={address}
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+              <TabsContent value="sns" className="space-y-4">
+                <div className="flex items-center justify-center py-12">
+                  <p className="text-lg text-gray-600">開発中</p>
+                </div>
+              </TabsContent>
+            </Tabs>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );

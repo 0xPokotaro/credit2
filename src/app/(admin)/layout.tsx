@@ -15,9 +15,7 @@ export default async function AdminLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <Providers>
-        {children}
-      </Providers>
+      <Providers>{children}</Providers>
     </NextIntlClientProvider>
   );
 }
