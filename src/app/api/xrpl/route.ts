@@ -1,21 +1,21 @@
 import { BlockchainService } from "@/services/blockchain/blockchain-service";
-import { isEvmAddress } from "@/utils/address";
+import { isXrplAddress } from "@/utils/address";
 
 const blockchainService = new BlockchainService();
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const address = searchParams.get("evm_address");
+  const address = searchParams.get("xrpl_address");
 
   if (!address) {
     return new Response(
-      JSON.stringify({ message: "EVM address is required" }),
+      JSON.stringify({ message: "XRPL address is required" }),
       { status: 400, headers: { "Content-Type": "application/json" } },
     );
   }
 
-  if (!isEvmAddress(address)) {
-    return new Response(JSON.stringify({ message: "Invalid EVM address" }), {
+  if (!isXrplAddress(address)) {
+    return new Response(JSON.stringify({ message: "Invalid XRPL address" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
     });
@@ -31,7 +31,10 @@ export async function GET(request: Request) {
       },
     });
   } catch (error) {
-    console.error("Failed to get transactions:", error);
-    return new Response("Failed to get transactions", { status: 500 });
+    console.error("Failed to get XRPL transactions:", error);
+    return new Response(
+      JSON.stringify({ message: "Failed to get transactions" }),
+      { status: 500, headers: { "Content-Type": "application/json" } },
+    );
   }
 }

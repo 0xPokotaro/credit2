@@ -1,5 +1,6 @@
 import type { CreditDetails, Transaction, Balance } from "@/types";
 import { BlockchainService } from "@/services/blockchain/blockchain-service";
+import { isEvmAddress, isXrplAddress } from "@/utils/address";
 
 const blockchainService = new BlockchainService();
 
@@ -7,20 +8,17 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const address = searchParams.get("evm_address");
 
-  // Avalancheの実データを取得（addressが指定されている場合）
   let balances: Balance[] = [];
-  let avalancheTransactions: Transaction[] = [];
+  let transactions: Transaction[] = [];
 
-  if (address) {
+  if (address && (isEvmAddress(address) || isXrplAddress(address))) {
     try {
       balances = await blockchainService.getBalances(address);
-      avalancheTransactions = await blockchainService.getTransactions(address);
+      transactions = await blockchainService.getTransactions(address);
     } catch (error) {
-      console.error("Failed to get Avalanche data:", error);
-      // エラーが発生した場合は空配列を返す
+      console.error("Failed to get blockchain data:", error);
     }
   }
-  const transactions = [...avalancheTransactions];
 
   const totalBalanceJPY = balances.reduce((sum, b) => sum + b.balanceJPY, 0);
 

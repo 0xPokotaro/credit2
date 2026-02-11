@@ -114,19 +114,28 @@ export function Step5Congratulations({
           <CardContent>
             <div className="space-y-2">
               <div className="flex items-center">
-                <CheckmarkIcon size={16} className="w-4 h-4 text-green-600 mr-2" />
+                <CheckmarkIcon
+                  size={16}
+                  className="w-4 h-4 text-green-600 mr-2"
+                />
                 <span className="text-sm text-gray-700">
                   Identity verification completed
                 </span>
               </div>
               <div className="flex items-center">
-                <CheckmarkIcon size={16} className="w-4 h-4 text-green-600 mr-2" />
+                <CheckmarkIcon
+                  size={16}
+                  className="w-4 h-4 text-green-600 mr-2"
+                />
                 <span className="text-sm text-gray-700">
                   Data processing via ZKP security
                 </span>
               </div>
               <div className="flex items-center">
-                <CheckmarkIcon size={16} className="w-4 h-4 text-green-600 mr-2" />
+                <CheckmarkIcon
+                  size={16}
+                  className="w-4 h-4 text-green-600 mr-2"
+                />
                 <span className="text-sm text-gray-700">
                   Multi-source assessment completed
                 </span>
